@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개별 게시글 보기</title>
+
+</head>
+<body>
+
+	<div th:fragment="viewPopup" class="modal fade" id="viewModal" role="dialog">
+	
+		<div class="modal-dialog modal-md">
+		
+			<div class="modal-content">
+			
+				<!-- header -->
+				<div class="modal-header">
+					<h4 class="modal-title">게시글 내용</h4>
+					<!-- 창닫기 버튼 -->
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				
+				<!-- content -->
+				<div id="article_content" class="modal-body form-group">
+				
+					<!-- 글 번호 -->
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label for="boardNum" class="control-label input-group-text ml-2">글번호 :</label>
+						</div>
+						
+						<input type="text" id="boardNum" name="boardNum" class="form-control input-sm mr-2" readonly />
+					</div>
+					
+					<!-- 글쓴이 -->
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label for="boardWriter" class="control-label input-group-text ml-2">글쓴이 :</label>
+						</div>
+						
+						<input type="text" id="boardWriter" name="boardWriter" class="form-control input-sm mr-2" readonly />
+					</div>
+					
+					<!-- 글제목 -->
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label for="boardTitle" class="control-label input-group-text ml-2">글쓴이 :</label>
+						</div>
+						
+						<input type="text" id="boardTitle" name="boardTitle" class="form-control input-sm mr-2" readonly />
+					</div>
+					
+					<!-- 글내용 -->
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label for="boardContent" class="control-label input-group-text ml-2">글내용 :</label>
+						</div>
+						
+						<textarea id="boardContent" name="boardContent" 
+								  cols="10" rows="7" class="form-control input-sm mr-2" readonly></textarea>
+					</div>
+				
+					<!-- 첨부 파일 -->
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<label for="boardFileUpload" class="control-label input-group-text ml-2">첨부파일 :</label>
+						</div>
+					
+					    <!-- 파일명 -->
+						<div class="ml-3 mt-2" id="boardFileUpload"></div>
+					</div>
+				
+				</div>
+				
+				<!-- 메뉴 -->
+			<div class="modal-footer">
+				
+				<!-- 추가 -->
+	      		<!-- 게시글 수정 버튼 -->
+		        <button type="button" 
+		                id="updateContentBtn_"
+		        		class="btn btn-default"
+		        		data-toggle="modal" 
+					    data-target="#updateModal"
+	   				    data-dismiss="modal"
+	   				    ng-click="initUpdateForm()">수정</button>
+	   				    
+	   			<!-- 게시글 삭제 버튼 -->
+		        <button type="button" 
+		                id="deleteContentBtn_"
+		        		class="btn btn-default"
+		        		data-toggle="modal" 
+					    data-target="#deleteModal"
+	   				    data-dismiss="modal">삭제</button>	    
+						
+				<!-- 창닫기 -->
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				
+			</div>
+			
+			</div> <!-- modal-content // -->
+			
+		</div> <!-- modal-dialog // -->
+	
+	</div>
+
+</body>
+</html>

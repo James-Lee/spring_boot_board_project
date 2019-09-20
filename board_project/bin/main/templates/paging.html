@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+
+<!-- 페이징 시작 -->
+	<div th:fragment="pageList" id="paging_section" class="mx-auto mt-5 mb-4 text-center" style="width:1000px;">
+	
+		<ul class="pagination justify-content-center">
+		
+			<!-- 이전 페이지 -->
+			<li class="page-item" th:if="${pageVO.page <=1}">
+				<a class="page-link" th:href="@{/getAllBoards.do/1}">이전</a>
+			</li>
+			<li class="page-item" th:unless="${pageVO.page <=1}">
+				<a class="page-link" th:href="@{'/getAllBoards.do/'+${pageVO.page-1}}">이전</a>
+			</li>
+			
+			<!-- 페이지들 -->
+			<div th:each="a, status : ${#numbers.sequence(pageVO.startPage, pageVO.endPage)}">
+				<li class="page-item active" th:if="${a == pageVO.page}">
+					<a class="page-link" th:href="@{'/getAllBoards.do/'+${a}}">[[${a}]]</a>
+				</li>
+				<li class="page-item" th:unless="${a == pageVO.page}">
+					<a class="page-link" th:href="@{'/getAllBoards.do/'+${a}}">[[${a}]]</a>
+				</li>
+			</div>
+			
+			<!-- 다음 페이지 -->
+			<li class="page-item" th:if="${pageVO.page >= pageVO.maxPage}">
+				<a class="page-link" th:href="@{'/getAllBoards.do/'+${pageVO.page}}">다음</a>
+			</li>
+			<li class="page-item" th:unless="${pageVO.page >= pageVO.maxPage}">
+				<a class="page-link" th:href="@{'/getAllBoards.do/'+${pageVO.page+1}}">다음</a>
+			</li>
+			
+		</ul>
+	
+	</div>
+	<!-- 페이징 끝 -->
+	
+</body>
+</html>	

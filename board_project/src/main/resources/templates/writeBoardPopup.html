@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>게시글 쓰기</title>
+</head>
+
+<body>
+
+	<div th:fragment="writePopup" class="modal fade" id="writeModal" role="dialog">
+	
+		<div class="modal-dialog modal-md">
+	
+			<!-- form -->
+			<form id="boardForm"
+				  name="boardForm"
+				  method="post" 
+				  enctype="multipart/form-data" 
+			      ng-model="boardForm"
+			      novalidate> 
+	
+				<div class="modal-content">
+				
+					<div class="modal-header">
+						<h4 class="modal-title">게시글 쓰기</h4> 
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					
+					<div class="modal-body form-group">
+				
+						<!-- bootstrap table 적용 -->
+						<table class="table">
+			
+							<tr class="form-group">
+								<td class="col-xs-2">
+									<label for="boardWriter" class="control-label"> 
+										<span style="color: red">*</span>글쓴이
+									</label>
+								</td>
+								<td class="col-xs-10">
+									<input type="text" 
+									       id="boardWriter"
+										   name="boardWriter" 
+										   ng-model="boardWriter" 
+										   class="form-control" 
+										   title="게시글 작성자를  2~15자 이내로 입력하십시오"
+										   ng-maxlength="15" 
+										   ng-minlength="2" 
+										   required="true" 
+										   autocomplete="off"/>
+								</td>
+							</tr>
+			
+							<!-- 글쓴이 에러 메시징 시작 -->
+							<tr id="boardWriter_ERR" 
+								class="err_msg"
+								ng-show="boardForm.boardWriter.$error.maxlegnth || 
+										 boardForm.boardWriter.$error.minlength">
+								<td colspan="2" class="col-xs-12">게시글 작성자를 2~15자 이내로 입력하십시오</td>
+							</tr>
+							<!-- 글쓴이 에러 메시징 끝 -->
+			
+							<tr>
+								<td><label for="boardTitle" class="control-label">
+										<span style="color: red">*</span>제 목
+								</label></td>
+								<td>
+									<input  type="text" 
+											id="boardTitle"
+											name="boardTitle"
+											class="form-control"
+											title="글제목은 2~50자이내로 적습니다" 
+											ng-model="boardTitle"
+											ng-maxlength="50" 
+											ng-minlength="2" 
+											required="true" 
+											autocomplete="off"/>
+								</td>
+							</tr>
+			
+							<!-- 게시글 제목 에러 메시징 시작 -->
+							<tr id="boardTitle_ERR" class="err_msg"
+								ng-show="boardForm.boardTitle.$error.maxlength || 
+										 boardForm.boardTitle.$error.minlength">
+								<td colspan="2" class="col-xs-12">글제목은 2~50자이내로 적습니다</td>
+							</tr>
+							<!-- 게시글 제목 에러 메시징 끝 -->
+			
+							<tr>
+								<td><label for="boardContent" class="control-label">
+										<span style="color: red">*</span>내 용
+								</label></td>
+								<td>
+									<textarea id="boardContent" 
+											  name="boardContent"
+											  cols="40" 
+											  rows="5" 
+											  title="글내용은 2~1000자이내로 적습니다" 
+											  class="form-control"
+											  ng-model="boardContent" 
+											  ng-maxlength="1000" 
+											  ng-minlength="2"
+											  required="true"
+											  autocomplete="off"></textarea>
+								</td>
+							</tr>
+			
+							<!-- 게시글 내용 에러 메시징 시작 -->
+							<tr id="boardContent_ERR" class="err_msg"
+								ng-show="boardForm.boardContent.$error.maxlength || 
+										 boardForm.boardContent.$error.minlength">
+								<td colspan="2" class="col-xs-12">글내용은 2~1000자이내로 적습니다</td>
+							</tr>
+							<!-- 게시글 내용 에러 메시징 끝 -->
+			
+							<tr>
+								<td><label for="boardFileUpload" class="control-label"> 파일
+										첨부 </label></td>
+								<td>
+									<input type="file" 
+										   id="boardFileUpload"
+										   name="boardFileUpload"
+										   class="form-control" 
+										   title="첨부 파일을 입력하십시오"
+										   autocomplete="off" />
+						   		</td>
+							</tr>
+			
+						</table>
+					
+					</div> <!-- modal-body -->
+				
+					<!-- <div id="commandCell" class="modal-footer"> -->
+					<div class="modal-footer">
+		
+						<!-- 게시글 쓰기 버튼 -->
+						<button type="button" 
+							    id="write_btn" 
+							    class="btn btn-info" 
+							    ng-disabled="boardForm.$invalid"
+						        ng-click="writeFormCheck()">등록</button>
+							    &nbsp;&nbsp; 
+							   
+						<input type="reset" class="btn btn-info" value="다시쓰기" />
+						
+						<!-- 창닫기 -->
+						<button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+					
+					</div>
+	
+				</div> <!-- modal-content -->
+	
+			</form>
+			
+		</div> <!-- modal-dialog -->
+		
+	</div>
+</body>

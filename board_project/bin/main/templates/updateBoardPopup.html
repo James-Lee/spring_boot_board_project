@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<title>게시글 수정</title>
+</head>
+
+<body>
+
+	<div th:fragment="updatePopup" class="modal fade" id="updateModal">
+	
+		<div class="modal-dialog modal-md">
+	
+			<!-- form -->
+			<form id="updateForm" 
+				  name="updateForm"
+				  method="post" 
+				  enctype="multipart/form-data"
+				  ng-model="updateForm"
+				  novalidate>
+				
+				<div class="modal-content">
+					
+					<div class="modal-header">
+						<h4 class="modal-title">게시글 수정 <span id="article_title"></span></h4>			
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+	
+					<div id="article_content" class="modal-body form-group">
+					
+					    <!-- 상태 플래그 점검 -->
+						<!-- <h6>제목 : {{updateForm.update_boardTitle.$valid}}
+							내용 : {{updateForm.update_boardContent.$valid}}</h6>
+							
+						<h6>제목(길이) : {{updateForm.update_boardTitle.$error.minlength}}, 
+									   {{updateForm.update_boardTitle.$error.maxlength}}
+							내용(길이) : {{updateForm.update_boardContent.$error.minlength}}, 
+								       {{updateForm.update_boardContent.$error.maxlength}}</h6>	 -->
+					
+					    <!-- text => hidden -->
+						<input type="hidden"
+							   id="update_boardReLev" 
+							   name="update_boardReLev" 
+							   ng-model="update_boardReLev"
+							   readonly>
+	
+	 					<div class="input-group mb-3">	
+			  	 			<div class="input-group-prepend">	
+								<label for="update_boardNum"
+									   class="control-label input-group-text ml-2">글번호 : &nbsp;&nbsp;</label>
+							</div>		   
+							<input type="text" 
+								   id="update_boardNum" 
+								   name="update_boardNum"
+								   class="form-control input-sm mr-2" 
+								   readonly />
+						</div>
+	
+						<div class="input-group mb-3">	
+	             	 		<div class="input-group-prepend">
+								<label for="update_boardWriter" 
+									   class="control-label input-group-text ml-2">글쓴이 : &nbsp;&nbsp;</label>
+							</div>			
+							<input type="text" 
+								   id="update_boardWriter" 
+								   name="update_boardWriter"
+								   class="form-control input-sm mr-2" 
+								   readonly />
+						</div>
+	
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label for="update_boardTitle" 
+									   class="control-label input-group-text ml-2">글제목 : &nbsp;&nbsp;</label>
+							</div>		   
+							<input type="text" 
+								   id="update_boardTitle" 
+								   name="update_boardTitle" 
+								   title="글제목은 2~50자 이내로 적습니다"
+								   ng-model="update_boardTitle"
+								   class="form-control input-sm mr-2" 
+								   ng-maxlength="50" 
+								   ng-minlength="2" 
+								   required="true" />
+						</div>
+						
+						<!-- 게시글 제목 에러 메시징 시작 -->
+						<div id="update_boardTitle_ERR" class="err_msg"
+							 ng-show="updateForm.update_boardTitle.$error.maxlength || 
+									  updateForm.update_boardTitle.$error.minlength"
+							 ng-hide="updateForm.update_boardTitle.$valid">
+							글제목은 2~50자 이내로 적습니다
+						</div>
+						<!-- 게시글 제목 에러 메시징 끝 -->
+	
+					    <div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label for="update_boardContent" 
+									   class="control-label input-group-text ml-2">글내용 : &nbsp;&nbsp;</label>
+							</div>
+							<textarea id="update_boardContent" 
+									  name="update_boardContent"
+									  class="form-control input-sm mr-2"
+									  title="글내용은 2~1000자 이내로 적습니다" 
+									  cols="10"
+									  rows="7"
+									  ng-model="update_boardContent" 
+									  ng-maxlength="1000" 
+									  ng-minlength="2"
+									  required="true"></textarea>
+						</div>
+						
+						<!-- 게시글 내용 에러 메시징 시작 -->
+						<div id="boardContent_ERR" class="err_msg"
+							 ng-show="updateForm.update_boardContent.$error.maxlength || 
+									  updateForm.update_boardContent.$error.minlength"
+							 ng-hide="updateForm.update_boardContent.$valid">
+							글내용은 2~1000자 이내로 적습니다
+						</div>
+						<!-- 게시글 내용 에러 메시징 끝 -->
+						
+					</div>
+	
+					<div class="modal-footer">
+					
+						<!-- 게시글 수정 버튼 -->
+						<button type="submit" 
+								id="update_btn_" 
+								class="btn btn-default"
+								ng-disabled="updateForm.update_boardTitle.$error.minlength ||
+											 updateForm.update_boardTitle.$error.maxlength ||
+											 updateForm.update_boardContent.$error.minlength ||
+											 updateForm.update_boardContent.$error.maxlength">글수정</button>
+											
+						<button type="button" 
+								class="btn btn-default" 
+								data-dismiss="modal">닫기</button>
+					
+					</div>
+				
+				  </div>	
+					
+				</div>	
+					
+			</form>
+	
+		</div>
+	</div>
+</body>

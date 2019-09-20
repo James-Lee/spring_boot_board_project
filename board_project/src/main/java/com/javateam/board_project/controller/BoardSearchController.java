@@ -34,7 +34,7 @@ public class BoardSearchController {
 		
 		// 총 게시글 & 총 게시글 수 
 		boardList= boardService.getBoardBySearch(searchKind, searchWord.trim(), limit, page);
-		int listCount = boardList.size();
+		int listCount = boardService.getCountBySearch(searchKind, searchWord);
 		
 		log.info("검색 게시글 수 : {}", listCount);
 		

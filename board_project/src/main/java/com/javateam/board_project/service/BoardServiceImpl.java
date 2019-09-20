@@ -117,4 +117,19 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	} //
 
+	@Override
+	public int getCountBySearch(String searchKind, String searchWord) {
+		
+		log.info("Service getCountBySearch");
+		int result = 0;
+		
+		if (searchKind.equals("제목")) {
+			result = dao.getCountBySearchByTitle(searchWord);
+		} else {
+			result = dao.getCountBySearchByContent(searchWord);
+		}
+		
+		return result;
+	}
+
 }

@@ -21,6 +21,8 @@ public interface BoardService {
 	boolean deleteBoard(int boardNum);
 
 	int getBoardNumByLastSeq();
+	
+	int getCountBySearch(String searchKind, String searchWord);
 
 	List<BoardVO> getBoardBySearch(String searchKind, String searchWord, int limit, int page);
 }

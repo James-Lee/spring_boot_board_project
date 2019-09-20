@@ -70,6 +70,12 @@ public interface BoardDao extends PagingAndSortingRepository<BoardVO, Integer> {
 	
 	@Query(value="SELECT hibernate_sequence.nextval FROM dual", nativeQuery=true)
 	int getBoardNumByLastSeq();
+	
+	@Query(value="SELECT count(*) FROM board_tbl b WHERE b.board_title like %:searchWord%", nativeQuery=true)
+	int getCountBySearchByTitle(@Param("searchWord") String searchWord);
+	
+	@Query(value="SELECT count(*) FROM board_tbl b WHERE b.board_content like %:searchWord%", nativeQuery=true)
+	int getCountBySearchByContent(@Param("searchWord") String searchWord);
 
 	@Query(value=BOARD_SEARCH_BY_TITLE_SQL, nativeQuery=true)
 	List<BoardVO> getBoardBySearchByTitle(@Param("searchWord") String searchWord, 
